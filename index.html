@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<form action="/submit.php" method="post">
+  <label for="nama">Nama Lengkap:</label>
+  <input type="text" id="nama" name="nama" required><br><br>
+
+  <label for="email">Email:</label>
+  <input type="email" id="email" name="email" required><br><br>
+
+  <input type="submit" value="Daftar">
+</form>
+<video width="400" controls>
+  <source src="video.mp4" type="video/mp4">
+  
+</video>
+<audio controls autoplay muted>
+  <source src="musik.mp3" type="audio/mpeg">
+  
+</audio>
+<h2>Simpan Nama dengan LocalStorage</h2>
+  <input type="text" id="nama" placeholder="Masukkan nama">
+  <button onclick="simpanNama()">Simpan</button>
+  <p id="hasil"></p>
+
+  <script>
+    function simpanNama() {
+      let nama = document.getElementById("nama").value;
+      localStorage.setItem("user", nama);
+      document.getElementById("hasil").innerText = "Halo, " + nama;
+    }
+
+    // Menampilkan nama jika sudah tersimpan sebelumnya
+    if(localStorage.getItem("user")){
+      document.getElementById("hasil").innerText = "Selamat datang kembali, " + localStorage.getItem("user");
+    }
+  </script>
+<h2>Menampilkan Lokasi Anda</h2>
+  <button onclick="getLocation()">Cek Lokasi</button>
+  <p id="lokasi"></p>
+
+  <script>
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        document.getElementById("lokasi").innerText = "Browser tidak mendukung Geolocation.";
+      }
+    }
+
+    function showPosition(position) {
+      document.getElementById("lokasi").innerText = 
+        "Latitude: " + position.coords.latitude + 
+        ", Longitude: " + position.coords.longitude;
+    }
+  </script>
+
+
+</body>
+</html>
+
